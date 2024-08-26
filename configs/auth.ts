@@ -1,5 +1,5 @@
 import { sign } from "jsonwebtoken";
-import { hash } from 'bcrypt'
+import { hash , compare} from 'bcrypt'
 
 const hashPassword = async (password : string) => {
     const hashedPassword = await hash(password , 12)
@@ -15,5 +15,9 @@ const generateToken = (data : TokenData) => {
     return generatedToken
 }
 
+const verifyPass = async (password : string , hashedPass : string) => {
+    const isValid = await compare(password , hashedPass)
+    return isValid
+}
 
-export {generateToken , hashPassword}
+export {generateToken , hashPassword , verifyPass}
