@@ -1,5 +1,7 @@
-import { sign } from "jsonwebtoken";
-import { hash , compare} from 'bcrypt'
+const jwt = require("jsonwebtoken")
+
+import { sign , verify } from "jsonwebtoken";
+import { hash , compare } from 'bcrypt'
 
 const hashPassword = async (password : string) => {
     const hashedPassword = await hash(password , 12)
@@ -20,4 +22,13 @@ const verifyPass = async (password : string , hashedPass : string) => {
     return isValid
 }
 
-export {generateToken , hashPassword , verifyPass}
+const verifyTheToken = (token : string) => {
+    try{
+        const verifyToken = verify(token , process.env.PRIVATE_KEY!)
+        return verifyToken
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export {generateToken , hashPassword , verifyPass , verifyTheToken}

@@ -16,7 +16,7 @@ export async function POST(req : Request){
     })
 
     if(!user){
-        return NextResponse.json({message : "This username or email has already been taken"})
+        return NextResponse.json({message : "This User Does not exists"})
     }
 
     const isPasswordCorrect = await verifyPass(password , user.password)

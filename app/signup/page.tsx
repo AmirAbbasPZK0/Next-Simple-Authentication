@@ -23,7 +23,7 @@ const SignUpPage = () => {
             return res.json()
         }).then(data => {
             setPending(false)
-            router.push("/")
+            router.push("/profile")
             router.refresh()
             alert(data.message)
         }).catch(err => {
